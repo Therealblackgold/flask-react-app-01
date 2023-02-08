@@ -14,7 +14,7 @@ const Welcome = () => {
   const date = new Date();
 
   // Formatting the date
-  const today = new Intl.DateTimeFormat("en-US", {
+  const today = new Intl.DateTimeFormat("en-ZA", {
     dateStyle: "full",
     timeStyle: "long",
   }).format(date);
@@ -23,10 +23,12 @@ const Welcome = () => {
     <>
       <div className="container px4">
         <div className="row gx-3">
-          <Widget />
-          <Widget />
-          <Widget />
-          <Widget today={today} />
+          <p>{isAdmin ? <h4 className="role-badge">admin user</h4> : ""}</p>
+          <h3>{today}</h3>
+          <Widget type="users" />
+          <Widget type="addUser" />
+          <Widget type="stores" />
+          <Widget type="addStore" />
         </div>
       </div>
       <div className="listContainer">{/* <WelcomeTable /> */}</div>

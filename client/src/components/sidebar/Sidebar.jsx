@@ -2,13 +2,17 @@ import { BsPeopleFill, BsPersonPlusFill } from "react-icons/bs";
 import { MdSpaceDashboard } from "react-icons/md";
 import { MdPeople } from "react-icons/md";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Sidebar = () => {
+  const { username, isManager, isAdmin } = useAuth();
+
   return (
     <div className="sidebar d-none d-md-block bg-dark text-white">
       <div className="top"></div>
       <hr />
       <div className="center">
+        <h5>username : {username}</h5>
         <ul>
           <p className="title">MAIN</p>
           <Link to="/dash" className="sidebar-link">

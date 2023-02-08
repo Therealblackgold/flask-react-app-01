@@ -10,7 +10,7 @@ import useAuth from "../../hooks/useAuth";
 
 const EditStoreForm = ({ store, users }) => {
   // destructuring form useAuth
-  const { isManager, isAdmin } = useAuth();
+  const { username, isManager, isAdmin } = useAuth();
 
   // destructuring form useUpdateStoreMutation
   const [updateStore, { isLoading, isSuccess, isError, error }] =
@@ -105,7 +105,9 @@ const EditStoreForm = ({ store, users }) => {
       <div className="form-wrapper">
         <form className="form" onSubmit={(e) => e.preventDefault()}>
           <div className="form__address-row">
-            <h2>Edit Store #{store.id}</h2>
+            <h2>
+              Edit Store {username} #{store.id}
+            </h2>
             <div className="form__action-buttons">
               <button
                 className="icon-button"
