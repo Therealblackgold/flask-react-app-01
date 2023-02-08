@@ -1,0 +1,24 @@
+/* 
+============
+home styles
+============
+*/
+.home {
+  display: flex;
+}
+
+.home .homeContainer {
+  margin-top: 8rem !important;
+  flex: 5;
+}
+
+.home .widgets,
+.home .charts {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+.home .charts {
+  padding: 5px 20px;
+}

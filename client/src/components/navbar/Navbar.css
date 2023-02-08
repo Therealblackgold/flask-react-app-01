@@ -1,0 +1,14 @@
+.navbar span {
+  color: #79c142;
+  font-size: 1.3rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem !important;
+}
+
+.nav-link:hover {
+  background-color: #79c14264;
+  color: whitesmoke !important;
+  border-radius: 5px;
+}
