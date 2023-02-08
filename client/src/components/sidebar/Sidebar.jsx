@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar bg-dark text-white">
+    <div className="sidebar d-none d-md-block bg-dark text-white">
       <div className="top"></div>
       <hr />
       <div className="center">
