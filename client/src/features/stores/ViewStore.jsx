@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { selectAllUsers } from "../users/usersApiSlice";
 import { selectStoreById } from "./storesApiSlice";
 import PLACEHOLDER from "../../assets/img-placeholder.png";
@@ -25,7 +25,7 @@ const ViewStore = () => {
             <div className="store-card px-3 py-5">
               <p className="headers">Description</p>
               <p>{store.description}</p>
-              <p className="headers">Adreess</p>
+              <p className="headers">Address</p>
               <p>{store.address}</p>
               <p className="headers">City</p>
               <p>{store.City}</p>
@@ -61,9 +61,9 @@ const ViewStore = () => {
           <div className="col">price</div>
           <div className="col">quantity</div>
           <div className="col">
-            <a href="{% url 'view-inventory'%}">
+            <Link to="/dash/items">
               <button className="btn btn-primary">view</button>
-            </a>
+            </Link>
           </div>
         </div>
         <hr />
