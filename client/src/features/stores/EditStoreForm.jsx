@@ -107,7 +107,7 @@ const EditStoreForm = ({ store, users }) => {
   // ui content
   const content = (
     <>
-      <h2 className="mb-3">Update User</h2>
+      <h2 className="mb-3">Update Store</h2>
       <div className="main-card">
         <form className="form login-card" onSubmit={onSubmit}>
           <div className="mb-3">
