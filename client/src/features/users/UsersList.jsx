@@ -37,14 +37,15 @@ const UsersList = () => {
     content = (
       <>
         <h1>Users</h1>
-        <section className="container mt-5 bg-light table-component py-5">
+        <section className="container text-center mt-5 bg-light table-component py-5">
           <div className="row bg-white px-0 mx-0 py-3 table-row-style align-items-items">
-            <div className="col-1" />
+            <div className="col-1"></div>
             <div className="col fw-bold">Username</div>
             <div className="col fw-bold">Email</div>
             <div className="col fw-bold">Role</div>
             <div className="col fw-bold">Blocked Status</div>
-            <div className="col-1" />
+            <div className="col-1"></div>
+            <div className="col-1"></div>
           </div>
           <hr />
           {tableContent}

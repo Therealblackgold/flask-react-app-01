@@ -30,10 +30,14 @@ const Item = ({ itemId }) => {
             {item.item_description}
           </td>
           <td className={`table__cell ${cellStatus}`}>
-            <button className="btn btn-info">update</button>
+            <button className="btn btn-info" onClick={handleEdit}>
+              update
+            </button>
           </td>
           <td className={`table__cell ${cellStatus}`}>
-            <button className="btn btn-success">view</button>
+            <button className="btn btn-success" onClick={handleEdit}>
+              view
+            </button>
           </td>
         </tr>
       </>

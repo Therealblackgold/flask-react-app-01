@@ -20,25 +20,46 @@ const User = ({ userId }) => {
 
     return (
       <>
-        <div className="row px-0 mx-0 py-3 table-row-style align-items-items">
+        <div className="row text-center px-0 mx-0 py-3 table-row-style align-items-items">
           <div className="col-1">
             <BsPersonCircle className="table-icons" />
           </div>
           <div className="col">{user.username}</div>
           <div className="col">{user.email}</div>
           <div className="col">
-            <BsCheckCircleFill className="table-icons" />
+            {user.admin ? (
+              <BsCheckCircleFill
+                className="table-icons"
+                style={{ color: "green" }}
+              />
+            ) : (
+              <BsCheckCircleFill
+                className="table-icons"
+                style={{ color: "lightgray" }}
+              />
+            )}
           </div>
           <div className="col">
-            <BsCheckCircle className="table-icons" />
+            {user.blocked ? (
+              <BsCheckCircleFill
+                className="table-icons"
+                style={{ color: "red" }}
+              />
+            ) : (
+              <BsCheckCircleFill
+                className="table-icons"
+                style={{ color: "lightgray" }}
+              />
+            )}
           </div>
           <div className="col-1">
-            <button className="btn btn-dark" onClick={handleEdit}>
-              <FontAwesomeIcon
-                icon={faPenToSquare}
-                className="table-icons"
-                style={{ color: "#79c142" }}
-              />
+            <button className="btn btn-info" onClick={handleEdit}>
+              update
+            </button>
+          </div>
+          <div className="col-1">
+            <button className="btn btn-success" onClick={handleEdit}>
+              view
             </button>
           </div>
         </div>

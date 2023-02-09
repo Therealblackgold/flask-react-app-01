@@ -23,13 +23,14 @@ const Store = ({ storeId }) => {
         <div className="col">{store.id}</div>
         <div className="col">{store.address}</div>
         <div className="col">{store.city}</div>
-        <div className="col">
-          <button className="btn btn-dark" onClick={handleEdit}>
-            <FontAwesomeIcon icon={faPenToSquare} className="table-icons" />
+        <div className="col">{store.province}</div>
+        <div className="col-1">
+          <button className="btn btn-info" onClick={handleEdit}>
+            update
           </button>
         </div>
         <div className="col-1">
-          <button className="btn button-colors" onClick={handleView}>
+          <button className="btn btn-success" onClick={handleView}>
             view
           </button>
         </div>
