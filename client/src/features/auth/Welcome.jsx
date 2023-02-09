@@ -23,12 +23,14 @@ const Welcome = () => {
     <>
       <div className="container px4">
         <div className="row gx-3">
-          <p>{isAdmin ? <h4 className="role-badge">admin user</h4> : ""}</p>
+          <div>{isAdmin ? <h4 className="role-badge">admin user</h4> : ""}</div>
           <h3>{today}</h3>
-          <Widget type="users" />
-          <Widget type="addUser" />
-          <Widget type="stores" />
-          <Widget type="addStore" />
+          <div className="widgets">
+            <Widget type="users" />
+            <Widget type="addUser" />
+            <Widget type="stores" />
+            <Widget type="addStore" />
+          </div>
         </div>
       </div>
       <div className="listContainer">{/* <WelcomeTable /> */}</div>

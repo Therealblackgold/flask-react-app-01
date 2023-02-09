@@ -31,9 +31,9 @@ This app is a React application with a flask API includes JWT authentication, au
 
 Clone or download this repository.
 
-To install the server side/Flask of the project cd into the project directory server create a python environment install requirements.txt and run the api.py file which should run on [http://localhost:5000].
+To install the server side/Flask of the project cd into the project directory server create a python virtual environment install requirements.txt and `run python api.py` which should run on [http://localhost:5000].
 
-To install the client side/React of the project cd into the client directory run npm install to download all package.json dependencies then run npm start to run the project the should start on [http://localhost:3000].
+To install the client side/React of the project cd into the client directory `ran npm install` to download all package.json dependencies then `run npm start` to run the project the should start on [http://localhost:3000].
 
 ### Please Note!!! always run the Flask API first before running the React app, and only admin users can create new users login as an admin user.
 

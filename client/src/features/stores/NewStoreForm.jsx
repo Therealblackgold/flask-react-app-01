@@ -75,9 +75,9 @@ const NewStoreForm = ({ users }) => {
   // declaring content variable to hold component jsx
   const content = (
     <>
+      <h2 className="mb-3">Add new Store</h2>
       <div className="main-card">
         <form className="form login-card" onSubmit={onSubmit}>
-          <h2 className="mb-3">Add new Store</h2>
           <div className="mb-3">
             <label className="form-label" htmlFor="title">
               Address:

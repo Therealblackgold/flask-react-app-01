@@ -12,7 +12,9 @@ const Widget = ({ type }) => {
         url: "/dash/users",
         link: "View users",
         background: "#F8F9FA",
-        icon: <BsPeopleFill className="icon" style={{ color: "#ffbe0b" }} />,
+        icon: (
+          <BsPeopleFill className="widget-icon" style={{ color: "white" }} />
+        ),
       };
       break;
     case "addUser":
@@ -22,7 +24,10 @@ const Widget = ({ type }) => {
         link: "add user",
         background: "#F8F9FA",
         icon: (
-          <BsFillPersonPlusFill className="icon" style={{ color: "#3a86ff" }} />
+          <BsFillPersonPlusFill
+            className="widget-icon"
+            style={{ color: "white" }}
+          />
         ),
       };
       break;
@@ -32,7 +37,7 @@ const Widget = ({ type }) => {
         url: "/dash/shops",
         link: "view stores",
         background: "#F8F9FA",
-        icon: <BsShop className="icon" style={{ color: "#ff006e" }} />,
+        icon: <BsShop className="widget-icon" style={{ color: "white" }} />,
       };
       break;
     case "addStore":
@@ -41,7 +46,9 @@ const Widget = ({ type }) => {
         url: "/dash/shops/new",
         link: "add store",
         background: "#F8F9FA",
-        icon: <MdAddToPhotos className="icon" style={{ color: "#8338ec" }} />,
+        icon: (
+          <MdAddToPhotos className="widget-icon" style={{ color: "white" }} />
+        ),
       };
       break;
     default:
