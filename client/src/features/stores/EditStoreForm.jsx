@@ -4,8 +4,6 @@ import {
   useDeleteStoreMutation,
 } from "./storesApiSlice";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../../hooks/useAuth";
 
 const EditStoreForm = ({ store, users }) => {
@@ -31,7 +29,7 @@ const EditStoreForm = ({ store, users }) => {
   const [contact_person, setContactPerson] = useState(store.contact_person);
   const [description, setDescription] = useState(store.description);
   const [email, setEmail] = useState(store.email);
-  // const [user, setUser] = useState(store.user_id);
+  const [id, setId] = useState(store.id);
   const [user_id, setUserId] = useState(store.user_id);
   const [postal_code, setPostalCode] = useState(store.postal_code);
   const [province, setProvince] = useState(store.province);
@@ -39,6 +37,7 @@ const EditStoreForm = ({ store, users }) => {
 
   //onChange function handles form changes
   // handle change functions
+  const onIdChanged = (e) => setId(e.target.value);
   const onAddressChanged = (e) => setAddress(e.target.value);
   const onCityChanged = (e) => setCity(e.target.value);
   const onUserChanged = (e) => setUserId(e.target.value);
@@ -54,6 +53,7 @@ const EditStoreForm = ({ store, users }) => {
     e.preventDefault();
     // checking if canSave is true
     await updateStore({
+      id,
       address,
       city,
       contact_number,
@@ -77,9 +77,6 @@ const EditStoreForm = ({ store, users }) => {
     }
   }, [isSuccess, isDelSuccess, navigate]);
 
-  // canSave function that checks all fields are completed
-  // const canSave = [address, city, user].every(Boolean) && !isLoading;
-
   // onClick handler to delete store by id
   const onDeleteStoreClicked = async () => {
     await deleteStore({ id: store.id });
@@ -98,10 +95,12 @@ const EditStoreForm = ({ store, users }) => {
   if (isManager || isAdmin) {
     deleteButton = (
       <button
-        className="icon-button"
+        className="btn btn-secondary button-width py-3"
         address="Delete"
         onClick={onDeleteStoreClicked}
-      ></button>
+      >
+        Delete Store
+      </button>
     );
   }
 
@@ -111,6 +110,21 @@ const EditStoreForm = ({ store, users }) => {
       <h2 className="mb-3">Update User</h2>
       <div className="main-card">
         <form className="form login-card" onSubmit={onSubmit}>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="title">
+              ID:
+            </label>
+            <input
+              className={`form-control py-3 border-success`}
+              id="address"
+              name="address"
+              type="text"
+              autoComplete="off"
+              value={id}
+              onChange={onIdChanged}
+              disabled
+            />
+          </div>
           <div className="mb-3">
             <label className="form-label" htmlFor="title">
               Address:
@@ -237,11 +251,7 @@ const EditStoreForm = ({ store, users }) => {
             </select>
           </div>
           <div className="row mt-4">
-            <div className="col">
-              <button className="btn btn-secondary button-width py-3">
-                Delete Store
-              </button>
-            </div>
+            <div className="col">{deleteButton}</div>
             <div className="col">
               <button
                 className="btn button-colors button-width py-3"
