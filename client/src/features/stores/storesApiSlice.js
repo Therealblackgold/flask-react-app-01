@@ -20,7 +20,7 @@ export const storesApiSlice = apiSlice.injectEndpoints({
       transformResponse: (responseData) => {
         const data = responseData.stores;
         console.log(data);
-        console.log(responseData);
+        // console.log(responseData);
         const loadedStores = data.map((store) => {
           // store.createdAt = "2 Dec 2023";
           return store;

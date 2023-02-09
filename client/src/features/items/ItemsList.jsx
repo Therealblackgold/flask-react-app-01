@@ -31,6 +31,8 @@ const ItemsList = () => {
     // destructuring ids from items data
     const { ids } = items;
 
+    console.log(`ITEMS: ${ids}`);
+
     // making sure we have ids.length before mapping
     const tableContent = ids.length
       ? ids.map((itemId) => <Item key={itemId} itemId={itemId} />)

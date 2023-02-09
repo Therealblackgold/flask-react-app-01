@@ -21,6 +21,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       //NB transformResponse helps change user.id to user._id when working with mongoDB
       transformResponse: (responseData) => {
         const data = responseData.users;
+        console.log(data);
+
         const loadedUsers = data.map((user) => {
           return user;
         });

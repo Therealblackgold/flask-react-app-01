@@ -8,6 +8,8 @@ const Item = ({ itemId }) => {
   // passing state and itemId to get a item
   const item = useSelector((state) => selectItemById(state, itemId));
 
+  console.log(`ITEM ID: ${itemId}`);
+  console.log(`ITEM AAAA: ${item}`);
   const navigate = useNavigate();
 
   if (item) {

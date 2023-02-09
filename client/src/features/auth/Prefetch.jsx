@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { storesApiSlice } from "../stores/storesApiSlice";
 import { usersApiSlice } from "../users/usersApiSlice";
+import { itemsApiSlice } from "../items/itemsApiSlice";
 
 const Prefetch = () => {
   useEffect(() => {
@@ -14,12 +15,14 @@ const Prefetch = () => {
       storesApiSlice.endpoints.getStores.initiate()
     );
     const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
+    const items = store.dispatch(itemsApiSlice.endpoints.getItems.initiate());
 
     // clean up method
     return () => {
       // here the state will unsubscribe when the component is unmounted
       console.log("unsubscribing");
       stores.unsubscribe();
+      items.unsubscribe();
       users.unsubscribe();
     };
   }, []);

@@ -21,7 +21,8 @@ export const itemsApiSlice = apiSlice.injectEndpoints({
       //NB transformResponse helps change item.id to item._id when working with mongoDB
       transformResponse: (responseData) => {
         const data = responseData.inventory;
-
+        console.log(data);
+        // console.log(responseData);
         const loadedItems = data.map((item) => {
           return item;
         });
