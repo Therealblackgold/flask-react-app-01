@@ -61,6 +61,15 @@ const ItemsList = () => {
             <th scope="col" className="table__th item__edit">
               user_id
             </th>
+            <th scope="col" className="table__th item__edit">
+              Description
+            </th>
+            <th scope="col" className="table__th item__edit">
+              Update
+            </th>
+            <th scope="col" className="table__th item__edit">
+              View
+            </th>
           </tr>
         </thead>
         <tbody>{tableContent}</tbody>

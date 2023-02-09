@@ -20,16 +20,20 @@ const Item = ({ itemId }) => {
     return (
       <>
         <tr className="table__row item">
+          <td className={`table__cell ${cellStatus}`}>{item.item_code}</td>
           <td className={`table__cell ${cellStatus}`}>{item.id}</td>
           <td className={`table__cell ${cellStatus}`}>{item.cost}</td>
+          <td className={`table__cell ${cellStatus}`}>R {item.price}</td>
+          <td className={`table__cell ${cellStatus}`}>{item.store_id}</td>
+          <td className={`table__cell ${cellStatus}`}>{item.user_id}</td>
           <td className={`table__cell ${cellStatus}`}>
             {item.item_description}
           </td>
-          <td className={`table__cell ${cellStatus}`}>{item.price}</td>
           <td className={`table__cell ${cellStatus}`}>
-            <button className="icon-button table__button" onClick={handleEdit}>
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </button>
+            <button className="btn btn-info">update</button>
+          </td>
+          <td className={`table__cell ${cellStatus}`}>
+            <button className="btn btn-success">view</button>
           </td>
         </tr>
       </>
