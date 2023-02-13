@@ -1,143 +1,280 @@
-import { faSave } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ROLES } from "../../config/roles";
-import { useAddNewItemMutation, addNewItem } from "./itemsApiSlice";
+// import { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import SectionHeading from "../../components/SectionHeading";
+// import { useAddNewItemMutation, addNewItem } from "./itemsApiSlice";
 
-const ITEM_REGEX = /^[A-z]{3,20}$/;
-const PWD_REGEX = /^[A-z0-9!@#$%]{6,12}$/;
+// const NewItemForm = ({ store }) => {
+//   // getting state values
+//   // starting with the addNewItem function which will be called when we need to call it
+//   // unlike a normal query
+//   const [addNewItem, { isLoading, isSuccess, isError, error }] =
+//     useAddNewItemMutation();
+
+//   const navigate = useNavigate();
+
+//   // state values
+//   const [item_code, setItem_code] = useState("");
+//   const [cost, setCost] = useState("");
+//   const [price, setPrice] = useState("");
+//   const [store_id, setStore_id] = useState(store.id);
+//   const [item_description, setItem_description] = useState("");
+
+//   // onChange handlers for the form
+//   const onItem_codeChanged = (e) => setItem_code(e.target.value);
+//   const onCostChanged = (e) => setCost(e.target.value);
+//   const onPriceChanged = (e) => setPrice(e.target.value);
+//   const onStore_idChanged = (e) => setStore_id(e.target.value);
+//   const onItem_descriptionChanged = (e) => setItem_description(e.target.value);
+
+//   // RESET FORM TEMPORARY STATE
+//   useEffect(() => {
+//     if (isSuccess) {
+//       navigate("/dash/items");
+//     }
+//     // dependencies that might change, navigate won't change but must be added to dependency array
+//   }, [isSuccess, navigate]);
+
+//   // onSubmit handler
+//   const onSubmit = async (e) => {
+//     e.preventDefault();
+
+//     await addNewItem({
+//       item_code,
+//       cost,
+//       price,
+//       store_id,
+//       item_description,
+//     });
+//   };
+
+//   const content = (
+//     <>
+//       <SectionHeading title="add new item" />
+//       <div className="form-wrapper">
+//         {/* form start */}
+//         <form className="form" onSubmit={onSubmit}>
+//           <label className="form__label" htmlFor="item_code">
+//             item code: <span className="nowrap">[3-20 letters]</span>
+//           </label>
+//           <input
+//             className={`form__input `}
+//             id="item_code"
+//             name="item_code"
+//             type="text"
+//             autoComplete="off"
+//             value={item_code}
+//             onChange={onItem_codeChanged}
+//           />
+//           <label className="form__label" htmlFor="itemCost">
+//             cost: <span className="nowrap">[3-20 letters]</span>
+//           </label>
+//           <input
+//             className={`form__input `}
+//             id="itemCost"
+//             name="itemCost"
+//             type="text"
+//             autoComplete="off"
+//             value={cost}
+//             onChange={onCostChanged}
+//           />
+//           <label className="form__label" htmlFor="price">
+//             price: <span className="nowrap">[3-20 letters]</span>
+//           </label>
+//           <input
+//             className={`form__input `}
+//             id="price"
+//             name="price"
+//             type="text"
+//             autoComplete="off"
+//             value={price}
+//             onChange={onPriceChanged}
+//           />
+//           <label className="form__label" htmlFor="store_id">
+//             store_id: <span className="nowrap">[3-20 letters]</span>
+//           </label>
+//           <input
+//             disabled
+//             className={`form__input `}
+//             id="store_id"
+//             name="store_id"
+//             type="text"
+//             autoComplete="off"
+//             value={store_id}
+//             onChange={onStore_idChanged}
+//           />
+//           <label className="form__label" htmlFor="item_description">
+//             item_description: <span className="nowrap">[3-20 letters]</span>
+//           </label>
+//           <input
+//             className={`form__input `}
+//             id="item_description"
+//             name="item_description"
+//             type="text"
+//             autoComplete="off"
+//             value={item_description}
+//             onChange={onItem_descriptionChanged}
+//           />
+//           <div className="row mt-4">
+//             <div className="col">
+//               <button
+//                 className="btn button-colors button-width py-3"
+//                 type="submit"
+//                 title="update item"
+//               >
+//                 Update
+//               </button>
+//             </div>
+//           </div>
+//         </form>
+//         {/* form end */}
+//       </div>
+//     </>
+//   );
+
+//   return content;
+// };
+
+// export default NewItemForm;
+
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import SectionHeading from "../../components/SectionHeading";
+import Spinner from "../../components/spinner/Spinner";
+import { selectStoreById } from "../stores/storesApiSlice";
+import { useAddNewItemMutation } from "./itemsApiSlice";
 
 const NewItemForm = () => {
-  // getting state values
-  // starting with the addNewItem function which will be called when we need to call it
-  // unlike a normal query
+  // getting store id
+  const { id } = useParams();
+
+  // getting store by passing stores state and store id
+  const store = useSelector((state) => selectStoreById(state, id));
+
   const [addNewItem, { isLoading, isSuccess, isError, error }] =
     useAddNewItemMutation();
 
   const navigate = useNavigate();
-  const [itemname, setItemname] = useState("");
-  const [validItemname, setValidItemname] = useState(false);
-  const [password, setPassword] = useState("");
-  const [validPassword, setValidPassword] = useState(false);
-  const [roles, setRoles] = useState(["Employee"]);
 
-  // VALIDATE ITEMNAME
-  useEffect(() => {
-    // testing itemname with regex
-    setValidItemname(ITEM_REGEX.test(itemname));
-    // dependencies that might change,
-  }, [itemname]);
+  // state values
+  const [item_code, setItem_code] = useState("");
+  const [cost, setCost] = useState("");
+  const [price, setPrice] = useState("");
+  const [store_id, setStore_id] = useState(store.id);
+  const [item_description, setItem_description] = useState("");
 
-  // VALIDATE PASSWORD
-  useEffect(() => {
-    // testing password with regex
-    setValidPassword(PWD_REGEX.test(password));
-    // dependencies that might change,
-  }, [password]);
+  // onChange handlers for the form
+  // const onStore_idChanged = (e) => setStore_id(e.target.value);
+  const onItem_codeChanged = (e) => setItem_code(e.target.value);
+  const onCostChanged = (e) => setCost(e.target.value);
+  const onPriceChanged = (e) => setPrice(e.target.value);
+  const onItem_descriptionChanged = (e) => setItem_description(e.target.value);
 
   // RESET FORM TEMPORARY STATE
   useEffect(() => {
     if (isSuccess) {
-      setItemname("");
-      setPassword("");
-      setRoles([""]);
-      navigate("/dash/items");
+      navigate(`/dash/shops/view/${store.id}`);
+      toast("item added to inventory");
     }
     // dependencies that might change, navigate won't change but must be added to dependency array
-  }, [isSuccess, navigate]);
+  }, [isSuccess, navigate, store.id]);
 
-  // onChange handlers
-  const onItemnameChanged = (e) => setItemname(e.target.value);
-  const onPasswordChanged = (e) => setPassword(e.target.value);
-
-  const onRolesChanged = (e) => {
-    const values = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setRoles(values);
-  };
-
-  const canSave =
-    [roles.length, validItemname, validPassword].every(Boolean) && !isLoading;
-
-  const onSaveItemClicked = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (canSave) {
-      // calling addNewItem function
-      await addNewItem({ itemname, password, roles });
-    }
+
+    await addNewItem({
+      item_code,
+      cost,
+      price,
+      store_id,
+      item_description,
+    });
   };
 
-  // select options
-  const options = Object.values(ROLES).map((role) => {
-    return (
-      <option key={role} value={role}>
-        {role}
-      </option>
-    );
-  });
-
-  // Validation css classes
-  const errClass = isError ? "errmsg" : "offscreen";
-  const validItemClass = !validItemname ? "form__input--incomplete" : "";
-  const validPwdClass = !validPassword ? "form__input--incomplete" : "";
-  const validRolesClass = !Boolean(roles.length)
-    ? "form__input--incomplete"
-    : "";
+  if (isLoading) <Spinner />;
 
   const content = (
     <>
-      <p className={errClass}>{error?.data?.message}</p>
+      <SectionHeading title="add new item" />
       <div className="form-wrapper">
-        <form action="" className="form" onSubmit={onSaveItemClicked}>
-          <div className="form__title-row">
-            <h2>New Item</h2>
-            <div className="form__actions-buttons">
-              <button className="icon-button" title="Save" disabled={!canSave}>
-                <FontAwesomeIcon icon={faSave} />
+        {/* form start */}
+        <form className="form" onSubmit={onSubmit}>
+          <label className="form__label" htmlFor="store_id">
+            store_id: <span className="nowrap">[3-20 letters]</span>
+          </label>
+          <input
+            disabled
+            className={`form__input `}
+            id="store_id"
+            name="store_id"
+            type="text"
+            autoComplete="off"
+            value={store_id}
+            hidden={true}
+            // onChange={onStore_idChanged}
+          />
+          <label className="form__label" htmlFor="item_code">
+            item code: <span className="nowrap">[3-20 letters]</span>
+          </label>
+          <input
+            className={`form__input `}
+            id="item_code"
+            name="item_code"
+            type="text"
+            autoComplete="off"
+            value={item_code}
+            onChange={onItem_codeChanged}
+          />
+          <label className="form__label" htmlFor="itemCost">
+            cost: <span className="nowrap">[3-20 letters]</span>
+          </label>
+          <input
+            className={`form__input `}
+            id="itemCost"
+            name="itemCost"
+            type="text"
+            autoComplete="off"
+            value={cost}
+            onChange={onCostChanged}
+          />
+          <label className="form__label" htmlFor="price">
+            price: <span className="nowrap">[3-20 letters]</span>
+          </label>
+          <input
+            className={`form__input `}
+            id="price"
+            name="price"
+            type="text"
+            autoComplete="off"
+            value={price}
+            onChange={onPriceChanged}
+          />
+          <label className="form__label" htmlFor="item_description">
+            item_description: <span className="nowrap">[3-20 letters]</span>
+          </label>
+          <input
+            className={`form__input `}
+            id="item_description"
+            name="item_description"
+            type="text"
+            autoComplete="off"
+            value={item_description}
+            onChange={onItem_descriptionChanged}
+          />
+          <div className="row mt-4">
+            <div className="col">
+              <button
+                className="btn button-colors button-width py-3"
+                type="submit"
+                title="update item"
+              >
+                save
               </button>
             </div>
           </div>
-          <label htmlFor="itemname" className="form__label">
-            Itemname: <span className="nowrap">[3-20 letters]</span>
-          </label>
-          <input
-            className={`form__input ${validItemClass}`}
-            type="text"
-            id="itemname"
-            name="itemname"
-            autoComplete="off"
-            value={itemname}
-            onChange={onItemnameChanged}
-          />
-          <label htmlFor="password" className="form__label">
-            Password: <span className="nowrap">[6-12 chars incl. !@#$%]</span>
-          </label>
-          <input
-            className={`form__input ${validPwdClass}`}
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={onPasswordChanged}
-          />
-          <label htmlFor="password" className="form__label">
-            ASSIGNED ROLES:
-          </label>
-          <select
-            className={`form__input ${validRolesClass}`}
-            name="roles"
-            id="roles"
-            multiple={true}
-            size="3"
-            value={roles}
-            onChange={onRolesChanged}
-          >
-            {options}
-          </select>
         </form>
+        {/* form end */}
       </div>
     </>
   );

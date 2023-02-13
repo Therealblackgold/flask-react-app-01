@@ -14,28 +14,30 @@ const Store = ({ storeId }) => {
   const handleEdit = () => navigate(`/dash/shops/${storeId}`);
   const handleView = () => navigate(`/dash/shops/view/${storeId}`);
 
-  return (
-    <>
-      <div className="row px-0 mx-0 py-3 table-row-style align-items-items">
-        <div className="col-1">
-          <BsShop className="table-icons" />
+  if (store) {
+    return (
+      <>
+        <div className="row px-0 mx-0 py-3 table-row-style align-items-items">
+          <div className="col-1">
+            <BsShop className="table-icons" />
+          </div>
+          <div className="col">{store.id}</div>
+          <div className="col">{store.address}</div>
+          <div className="col">{store.city}</div>
+          <div className="col">{store.province}</div>
+          <div className="col-1">
+            <button className="btn btn-info" onClick={handleEdit}>
+              update
+            </button>
+          </div>
+          <div className="col-1">
+            <button className="btn btn-success" onClick={handleView}>
+              view
+            </button>
+          </div>
         </div>
-        <div className="col">{store.id}</div>
-        <div className="col">{store.address}</div>
-        <div className="col">{store.city}</div>
-        <div className="col">{store.province}</div>
-        <div className="col-1">
-          <button className="btn btn-info" onClick={handleEdit}>
-            update
-          </button>
-        </div>
-        <div className="col-1">
-          <button className="btn btn-success" onClick={handleView}>
-            view
-          </button>
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else return null;
 };
 export default Store;

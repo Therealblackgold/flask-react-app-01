@@ -348,7 +348,7 @@ def add_store(current_user):
         contact_person=data['contact_person'],
         contact_number=data['contact_number'],
         email=data['email'],
-        user_id=current_user.id
+        user_id=data['user_id'],
         )
     db.session.add(add_store)
     db.session.commit()
@@ -373,6 +373,7 @@ def update_store(current_user, store_id):
     store.address = request.json.get('address', store.address)
     store.city = request.json.get('city', store.city)
     store.province = request.json.get('province', store.province)
+    store.user_id = request.json.get('user_id', store.user_id)
     store.postal_code = request.json.get('postal_code', store.postal_code)
     store.contact_person = request.json.get('contact_person', store.contact_person)
     store.contact_number = request.json.get('contact_number', store.contact_number)
@@ -411,7 +412,7 @@ def add_inventory(current_user):
         price=data['price'],
         store_id=data['store_id'],
         item_code=data['item_code'],
-        user_id=current_user.id
+        
         )
     db.session.add(add_inventory)
     db.session.commit()
@@ -432,29 +433,32 @@ def view_item(current_user, inventory_id):
 
     inventory_data = {}
     inventory_data['id'] = inventory.id
-    inventory_data['item_description'] = inventory.item_description
     inventory_data['item_code'] = inventory.item_code
     inventory_data['cost'] = inventory.cost
     inventory_data['price'] = inventory.price
     inventory_data['store_id'] = inventory.store_id
     inventory_data['user_id'] = inventory.user_id
+    inventory_data['item_description'] = inventory.item_description
 
     return jsonify(inventory_data)
 
 @app.route('/update-item/<inventory_id>',methods=["PUT"])
 @token_required
+@allow_cross_origin
 def update_item(current_user, inventory_id):
     if current_user.admin == True:
-        inventory = Inventory.query.filter_by(item_code=inventory_id).first()
+        inventory = Inventory.query.filter_by(id=inventory_id).first()
     else:
-        inventory = Inventory.query.filter_by(item_code=inventory_id, user_id=current_user.id).first()
+        inventory = Inventory.query.filter_by(id=inventory_id, user_id=current_user.id).first()
 
     if not inventory:
         return jsonify({'message' : 'No inventory found!'})
 
+    inventory.id = request.json.get('id', inventory.id)
     inventory.item_code = request.json.get('item_code', inventory.item_code)
     inventory.cost = request.json.get('cost', inventory.cost)
     inventory.price = request.json.get('price', inventory.price)
+    inventory.store_id = request.json.get('store_id', inventory.store_id)
     inventory.item_description = request.json.get('item_description', inventory.item_description)
     db.session.commit()
     

@@ -5,10 +5,11 @@ import {
 } from "./storesApiSlice";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import SectionHeading from "../../components/SectionHeading";
 
 const EditStoreForm = ({ store, users }) => {
   // destructuring form useAuth
-  const { username, isManager, isAdmin } = useAuth();
+  const { isManager, isAdmin } = useAuth();
 
   // destructuring form useUpdateStoreMutation
   const [updateStore, { isLoading, isSuccess, isError, error }] =
@@ -40,7 +41,6 @@ const EditStoreForm = ({ store, users }) => {
   const onIdChanged = (e) => setId(e.target.value);
   const onAddressChanged = (e) => setAddress(e.target.value);
   const onCityChanged = (e) => setCity(e.target.value);
-  const onUserChanged = (e) => setUserId(e.target.value);
   const onPostalCodeChanged = (e) => setPostalCode(e.target.value);
   const onEmailChanged = (e) => setEmail(e.target.value);
   const onDescriptionChanged = (e) => setDescription(e.target.value);
@@ -52,6 +52,19 @@ const EditStoreForm = ({ store, users }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     // checking if canSave is true
+
+    console.log({
+      id,
+      address,
+      city,
+      contact_number,
+      contact_person,
+      description,
+      email,
+      postal_code,
+      user_id,
+      province,
+    });
     await updateStore({
       id,
       address,
@@ -82,6 +95,12 @@ const EditStoreForm = ({ store, users }) => {
     await deleteStore({ id: store.id });
   };
 
+  // const onUserChanged = (e) => setUserId(e.target.value);
+
+  const onUserChanged = (e) => {
+    setUserId(Number(e.target.value));
+  };
+
   const options = users.map((user) => {
     return (
       <option key={user.id} value={user.id}>
@@ -107,7 +126,7 @@ const EditStoreForm = ({ store, users }) => {
   // ui content
   const content = (
     <>
-      <h2 className="mb-3">Update Store</h2>
+      <SectionHeading title="update store" />
       <div className="main-card">
         <form className="form login-card" onSubmit={onSubmit}>
           <div className="mb-3">

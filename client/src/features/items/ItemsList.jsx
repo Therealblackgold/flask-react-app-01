@@ -2,7 +2,6 @@ import React from "react";
 import Item from "./Item";
 import { useGetItemsQuery } from "./itemsApiSlice";
 
-// TODO: STILL NEED TO COMPLETE THIS PART
 const ItemsList = () => {
   const {
     data: items,
@@ -31,7 +30,7 @@ const ItemsList = () => {
     // destructuring ids from items data
     const { ids } = items;
 
-    console.log(`ITEMS: ${ids}`);
+    // console.log(`ITEMS: ${ids}`);
 
     // making sure we have ids.length before mapping
     const tableContent = ids.length
@@ -39,41 +38,43 @@ const ItemsList = () => {
       : null;
 
     content = (
-      <table className="table table--items">
-        <thead className="table__thead">
-          <tr>
-            <th scope="col" className="table__th item__edit">
-              item_code
-            </th>
-            <th scope="col" className="table__th item__itemname">
-              id
-            </th>
-            <th scope="col" className="table__th item__roles">
-              cost
-            </th>
+      <>
+        <table className="table table--items">
+          <thead className="table__thead">
+            <tr>
+              <th scope="col" className="table__th item__edit">
+                item_code
+              </th>
+              <th scope="col" className="table__th item__itemname">
+                id
+              </th>
+              <th scope="col" className="table__th item__roles">
+                cost
+              </th>
 
-            <th scope="col" className="table__th item__edit">
-              price
-            </th>
-            <th scope="col" className="table__th item__edit">
-              store_id
-            </th>
-            <th scope="col" className="table__th item__edit">
-              user_id
-            </th>
-            <th scope="col" className="table__th item__edit">
-              Description
-            </th>
-            <th scope="col" className="table__th item__edit">
-              Update
-            </th>
-            <th scope="col" className="table__th item__edit">
-              View
-            </th>
-          </tr>
-        </thead>
-        <tbody>{tableContent}</tbody>
-      </table>
+              <th scope="col" className="table__th item__edit">
+                price
+              </th>
+              <th scope="col" className="table__th item__edit">
+                store_id
+              </th>
+              <th scope="col" className="table__th item__edit">
+                user_id
+              </th>
+              <th scope="col" className="table__th item__edit">
+                Description
+              </th>
+              <th scope="col" className="table__th item__edit">
+                Update
+              </th>
+              <th scope="col" className="table__th item__edit">
+                View
+              </th>
+            </tr>
+          </thead>
+          <tbody>{tableContent}</tbody>
+        </table>
+      </>
     );
   }
   return content;

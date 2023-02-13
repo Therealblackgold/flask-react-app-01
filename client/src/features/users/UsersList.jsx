@@ -1,3 +1,4 @@
+import SectionHeading from "../../components/SectionHeading";
 import User from "./User";
 import { useGetUsersQuery } from "./usersApiSlice";
 
@@ -36,14 +37,14 @@ const UsersList = () => {
 
     content = (
       <>
-        <h1>Users</h1>
+        <SectionHeading title="users" />
         <section className="container text-center mt-5 bg-light table-component py-5">
           <div className="row bg-white px-0 mx-0 py-3 table-row-style align-items-items">
             <div className="col-1"></div>
-            <div className="col fw-bold">Username</div>
-            <div className="col fw-bold">Email</div>
-            <div className="col fw-bold">Role</div>
-            <div className="col fw-bold">Blocked Status</div>
+            <div className="col fw-bold">username</div>
+            <div className="col fw-bold">email</div>
+            <div className="col fw-bold">admin role</div>
+            <div className="col fw-bold">blocked status</div>
             <div className="col-1"></div>
             <div className="col-1"></div>
           </div>

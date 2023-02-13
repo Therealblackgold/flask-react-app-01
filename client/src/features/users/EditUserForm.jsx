@@ -94,13 +94,12 @@ const EditUserForm = ({ user }) => {
   const errContent = (error?.data?.message || delError?.data?.message) ?? "";
 
   const content = (
-    <section>
+    <div>
+      <h1 className="section-heading">update user</h1>
       <p className={errClass}>{errContent}</p>
       <div className="main-card">
         {/* form start */}
         <form className="form login-card" onSubmit={(e) => e.preventDefault()}>
-          <h2 className="mb-3">Edit User</h2>
-
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
               Username
@@ -189,7 +188,7 @@ const EditUserForm = ({ user }) => {
         </form>
         {/* form end */}
       </div>
-    </section>
+    </div>
   );
 
   return content;

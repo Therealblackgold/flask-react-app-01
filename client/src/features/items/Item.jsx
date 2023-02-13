@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectItemById } from "./itemsApiSlice";
@@ -8,8 +6,8 @@ const Item = ({ itemId }) => {
   // passing state and itemId to get a item
   const item = useSelector((state) => selectItemById(state, itemId));
 
-  console.log(`ITEM ID: ${itemId}`);
-  console.log(`ITEM AAAA: ${item}`);
+  // console.log(`ITEM ID: ${itemId}`);
+  // console.log(`ITEM DETAILS: ${item}`);
   const navigate = useNavigate();
 
   if (item) {

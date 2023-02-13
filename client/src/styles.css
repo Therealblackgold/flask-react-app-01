@@ -2,6 +2,7 @@
 
 :root {
   --MAIN-COLOR: #79c142;
+  --GRAY-COLOR: #363e45;
   --BG-DARK: #212529;
   --BG-SHADOW: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -42,6 +43,15 @@ body::before {
 /* style={{ marginTop: "8rem", padding: "4rem" }} */
 section {
   margin-top: 8rem;
+}
+
+.section-heading {
+  background-color: var(--GRAY-COLOR);
+  color: whitesmoke;
+  width: fit-content;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
 }
 
 .home {
@@ -252,7 +262,7 @@ section {
 }
 
 .headers {
-  font-size: 14px;
+  font-size: 1rem;
   color: grey;
   margin-bottom: 0px;
 }
@@ -318,4 +328,14 @@ section {
   background-color: lightslategray;
   padding: 7px;
   border-radius: 50%;
+}
+
+.store-display li {
+  list-style-type: none;
+  font-size: 20px !important;
+}
+
+.edit-icon {
+  color: var(--GRAY-COLOR);
+  font-size: 25px;
 }

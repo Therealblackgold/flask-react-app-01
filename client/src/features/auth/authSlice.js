@@ -15,10 +15,14 @@ const authSlice = createSlice({
       //setting state.token to null on logout
       state.token = null;
     },
+    sendToken: (state, action) => {
+      //setting state.token to action.payload
+      state.token = action.payload;
+    },
   },
 });
 
-export const { setCredentials, logOut } = authSlice.actions;
+export const { setCredentials, logOut, sendToken } = authSlice.actions;
 
 export default authSlice.reducer;
 

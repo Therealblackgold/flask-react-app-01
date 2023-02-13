@@ -35,7 +35,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
-    // REFRESHING TOKEN
+    // REFRESH TOKEN
     refresh: builder.mutation({
       query: () => ({
         url: "/refresh",
@@ -50,7 +50,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
           const { accessToken } = data;
 
           // const { accessToken } = data;
-          // this use of dispatch will setCredentials instead of importing dispatch on every component that uses the useRefreshMutation
+          //!NB this use of dispatch will setCredentials instead of importing dispatch on every component that uses the useRefreshMutation
           dispatch(setCredentials({ accessToken }));
         } catch (error) {
           console.log(error);

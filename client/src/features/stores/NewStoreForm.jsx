@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SectionHeading from "../../components/SectionHeading";
 import { useAddNewStoreMutation } from "./storesApiSlice";
 
 const NewStoreForm = ({ users }) => {
@@ -49,7 +50,7 @@ const NewStoreForm = ({ users }) => {
   // save handler
   const onSubmit = async (e) => {
     e.preventDefault();
-    // checking if canSave is true
+    // sending form fields to the API using addNewStore() action
     await addNewStore({
       user: user_id,
       address,
@@ -75,7 +76,7 @@ const NewStoreForm = ({ users }) => {
   // declaring content variable to hold component jsx
   const content = (
     <>
-      <h2 className="mb-3">Add new Store</h2>
+      <SectionHeading title="add new store" />
       <div className="main-card">
         <form className="form login-card" onSubmit={onSubmit}>
           <div className="mb-3">

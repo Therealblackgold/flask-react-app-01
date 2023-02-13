@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SectionHeading from "../../components/SectionHeading";
 import { useAddNewUserMutation, addNewUser } from "./usersApiSlice";
 
 const NewUserForm = () => {
@@ -13,13 +14,6 @@ const NewUserForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [admin, setAdmin] = useState(false);
-
-  // VALIDATE PASSWORD
-  // useEffect(() => {
-  //   // testing password with regex
-  //   setValidPassword(PWD_REGEX.test(password));
-  //   // dependencies that might change,
-  // }, [password]);
 
   // RESET FORM TEMPORARY STATE
   useEffect(() => {
@@ -39,14 +33,6 @@ const NewUserForm = () => {
   const onEmailChanged = (e) => setEmail(e.target.value);
   const onAdminChanged = () => setAdmin((prev) => !prev);
 
-  // const onAdminChanged = (e) => {
-  //   const values = Array.from(
-  //     e.target.selectedOptions,
-  //     (option) => option.value
-  //   );
-  //   setAdmin(values);
-  // };
-
   const onSubmit = async (e) => {
     e.preventDefault();
     // calling addNewUser function
@@ -55,6 +41,7 @@ const NewUserForm = () => {
 
   const content = (
     <>
+      <SectionHeading title="add new user" />
       <div className="md main-card">
         <form
           action=""

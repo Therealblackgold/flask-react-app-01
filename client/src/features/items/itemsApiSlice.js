@@ -21,7 +21,7 @@ export const itemsApiSlice = apiSlice.injectEndpoints({
       //NB transformResponse helps change item.id to item._id when working with mongoDB
       transformResponse: (responseData) => {
         const data = responseData.inventory;
-        console.log(data);
+        // console.log(data);
         // console.log(responseData);
         const loadedItems = data.map((item) => {
           return item;
@@ -43,7 +43,7 @@ export const itemsApiSlice = apiSlice.injectEndpoints({
     addNewItem: builder.mutation({
       // passing initialItemData to be added
       query: (initialItemData) => ({
-        url: `/add-item`,
+        url: `/add-inventory`,
         method: "POST",
         body: {
           ...initialItemData,
@@ -57,7 +57,7 @@ export const itemsApiSlice = apiSlice.injectEndpoints({
       // passing initialItemData to be updated
       query: (initialItemData) => ({
         url: `/update-item/${initialItemData.id}`,
-        method: "PATCH",
+        method: "PUT",
         body: {
           ...initialItemData,
         },

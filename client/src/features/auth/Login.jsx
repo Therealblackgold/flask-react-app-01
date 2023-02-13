@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sendToken } from "./authSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,10 +20,12 @@ const Login = () => {
       })
       .then((response) => {
         const userInfo = response.data;
-        const admindata = userInfo.user_data;
-        const { token } = admindata;
+        const adminData = userInfo.user_data;
+        const { token } = adminData;
 
         document.cookie = `token=${token}`;
+
+        dispatch(sendToken(token));
 
         localStorage.setItem("user", token);
 

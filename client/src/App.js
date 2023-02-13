@@ -17,55 +17,66 @@ import ViewStore from "./features/stores/ViewStore";
 import ItemsList from "./features/items/ItemsList";
 import EditItem from "./features/items/EditItem";
 import NewItemForm from "./features/items/NewItemForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Public />} />
-        <Route path="login" element={<Login />} />
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Public />} />
+          <Route path="login" element={<Login />} />
 
-        {/* <PersistLogin/>  */}
-        <Route element={<PersistLogin />}>
-          {/* <Prefetch/> helps keep protected routes state longer than default */}
-          <Route element={<Prefetch />}>
-            <Route path="dash" element={<DashLayout />}>
-              <Route index element={<Welcome />} />
+          {/* <PersistLogin/>  */}
+          <Route element={<PersistLogin />}>
+            {/* <Prefetch/> helps keep protected routes state longer than default */}
+            <Route element={<Prefetch />}>
+              <Route path="dash" element={<DashLayout />}>
+                <Route index element={<Welcome />} />
 
-              <Route path="users">
-                <Route index element={<UsersList />} />
-                <Route path=":id" element={<EditUser />} />
-                <Route path="new" element={<NewUserForm />} />
+                <Route path="users">
+                  <Route index element={<UsersList />} />
+                  <Route path=":id" element={<EditUser />} />
+                  <Route path="new" element={<NewUserForm />} />
 
-                {/* end of protected users route = /dash/users/*/}
+                  {/* end of protected users route = /dash/users/*/}
+                </Route>
+
+                <Route path="shops">
+                  <Route index element={<StoresList />} />
+                  {/* <Route path=":id" element={<EditStore />} /> */}
+                  <Route path="new" element={<NewStore />} />
+                  <Route path="add" element={<NewStoreForm />} />
+                  <Route path="view/:id" element={<ViewStore />} />
+
+                  {/* complex routes shops/id */}
+                  <Route path=":id">
+                    <Route index element={<EditStore />} />
+                    <Route path="add/item" element={<NewItemForm />} />
+                    <Route path="update/item" element={<EditItem />} />
+                  </Route>
+
+                  {/* end of protected notes route = /dash/shops */}
+                </Route>
+
+                <Route path="items">
+                  <Route index element={<ItemsList />} />
+                  <Route path="add" element={<NewItemForm />} />
+
+                  {/* end of protected notes route = /dash/items */}
+                </Route>
+
+                {/* end of protected routes =  /dash */}
               </Route>
-
-              <Route path="shops">
-                <Route index element={<StoresList />} />
-                <Route path=":id" element={<EditStore />} />
-                <Route path="new" element={<NewStore />} />
-                <Route path="add" element={<NewStoreForm />} />
-                <Route path="view/:id" element={<ViewStore />} />
-
-                {/* end of protected notes route = /dash/notes */}
-              </Route>
-
-              <Route path="items">
-                <Route index element={<ItemsList />} />
-                <Route path=":id" element={<EditItem />} />
-                <Route path="add" element={<NewItemForm />} />
-
-                {/* end of protected notes route = /dash/items */}
-              </Route>
-
-              {/* end of protected routes =  /dash */}
             </Route>
           </Route>
-        </Route>
 
-        {/* end of public routes = / */}
-      </Route>
-    </Routes>
+          {/* end of public routes = / */}
+        </Route>
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 

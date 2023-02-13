@@ -2,6 +2,7 @@ import React from "react";
 import Store from "./Store";
 import { useGetStoresQuery } from "./storesApiSlice";
 import useAuth from "../../hooks/useAuth";
+import SectionHeading from "../../components/SectionHeading";
 
 const StoresList = () => {
   const { username, isManager, isAdmin } = useAuth();
@@ -38,8 +39,8 @@ const StoresList = () => {
 
     content = (
       <>
-        <h1>Stores</h1>
-        <section className="container text-center mt-5 bg-light table-component py-5">
+        <SectionHeading title="stores" />
+        <div className="container text-center mt-5 bg-light table-component py-5">
           <div className="row bg-white px-0 mx-0 py-3 table-row-style align-items-items">
             <div className="col-1"></div>
             <div className="col fw-bold">id</div>
@@ -51,7 +52,7 @@ const StoresList = () => {
           </div>
           <hr />
           {tableContent}
-        </section>
+        </div>
       </>
     );
   }
