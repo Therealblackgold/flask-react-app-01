@@ -11,7 +11,8 @@ const Item = ({ itemId }) => {
   const navigate = useNavigate();
 
   if (item) {
-    const handleEdit = () => navigate(`/dash/items/${itemId}`);
+    const handleEdit = () =>
+      navigate(`/dash/shops/${item.store_id}/update/${item.id}`);
 
     const cellStatus = item.active ? "" : "table__cell--inactive";
 
@@ -30,11 +31,6 @@ const Item = ({ itemId }) => {
           <td className={`table__cell ${cellStatus}`}>
             <button className="btn btn-info" onClick={handleEdit}>
               update
-            </button>
-          </td>
-          <td className={`table__cell ${cellStatus}`}>
-            <button className="btn btn-success" onClick={handleEdit}>
-              view
             </button>
           </td>
         </tr>

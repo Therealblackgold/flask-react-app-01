@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3 fixed-top">
       <div className="container">
         <a href className="navbar-brand">
-          <span>Zeus</span> Manager
+          <span>GNT</span> Manager
         </a>
         <button
           className="navbar-toggler"

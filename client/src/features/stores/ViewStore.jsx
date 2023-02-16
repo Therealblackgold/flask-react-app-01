@@ -22,7 +22,7 @@ const ViewStore = () => {
   const navigate = useNavigate();
 
   const handleAddItem = () => navigate(`/dash/shops/${store.id}/add/item`);
-  const handleEdit = () => navigate(`/dash/shops/${store.id}/update/item`);
+  const handleEdit = () => navigate(`/dash/shops/update/${store.id}`);
 
   const content =
     store && users ? (
@@ -30,11 +30,6 @@ const ViewStore = () => {
         <div className="row text-start">
           <div className="col">
             <SectionHeading title="store details page" />
-            <div className="col">
-              <button className="btn btn-secondary">
-                update store details
-              </button>
-            </div>
             <ul className="store-display">
               <li>
                 <span className="headers">update store details</span> :{" "}
@@ -49,7 +44,7 @@ const ViewStore = () => {
                 </button>
               </li>
               <li>
-                <span className="headers">Owner</span> : {store.user_id}
+                <span className="headers">Owner ID</span> : {store.user_id}
               </li>
               <li>
                 <span className="headers">Address</span> : {store.address}

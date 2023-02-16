@@ -28,7 +28,6 @@ const EditItemForm = ({ item }) => {
   const [cost, setCost] = useState(item.cost);
   const [price, setPrice] = useState(item.price);
   const [store_id, setStore_id] = useState(item.store_id);
-  const [user_id, setUser_id] = useState(item.user_id);
   const [item_description, setItem_description] = useState(
     item.item_description
   );
@@ -39,10 +38,10 @@ const EditItemForm = ({ item }) => {
       // reset state
 
       // redirect to items list
-      navigate("/dash/items");
+      navigate(`/dash/shops/view/${store_id}`);
       toast("item updated");
     }
-  }, [isSuccess, isDelSuccess, navigate]);
+  }, [isSuccess, isDelSuccess, navigate, store_id]);
 
   // onChange handlers for the form
   const onIdChanged = (e) => setId(e.target.value);
@@ -50,7 +49,6 @@ const EditItemForm = ({ item }) => {
   const onCostChanged = (e) => setCost(e.target.value);
   const onPriceChanged = (e) => setPrice(e.target.value);
   const onStore_idChanged = (e) => setStore_id(e.target.value);
-  const onUser_idChanged = (e) => setUser_id(e.target.value);
   const onItem_descriptionChanged = (e) => setItem_description(e.target.value);
 
   // onSubmit handler
@@ -63,7 +61,6 @@ const EditItemForm = ({ item }) => {
       cost,
       price,
       store_id,
-      user_id,
       item_description,
     });
   };
@@ -90,14 +87,14 @@ const EditItemForm = ({ item }) => {
   const content = (
     <>
       <SectionHeading title="update item" />
-      <div className="form-wrapper">
+      <div className="main-card form-wrapper">
         {/* form start */}
         <form className="form" onSubmit={onSubmit}>
-          <label className="form__label" htmlFor="itemName">
-            id: <span className="nowrap">[3-20 letters]</span>
+          <label className="form-label" htmlFor="itemName">
+            Item ID:
           </label>
           <input
-            className={`form__input `}
+            className="form-control py border-success"
             id="itemName"
             name="itemName"
             type="text"
@@ -105,11 +102,11 @@ const EditItemForm = ({ item }) => {
             value={id}
             onChange={onIdChanged}
           />
-          <label className="form__label" htmlFor="item_code">
-            item code: <span className="nowrap">[3-20 letters]</span>
+          <label className="form-label" htmlFor="item_code">
+            Item Code:
           </label>
           <input
-            className={`form__input `}
+            className="form-control py border-success"
             id="item_code"
             name="item_code"
             type="text"
@@ -117,11 +114,11 @@ const EditItemForm = ({ item }) => {
             value={item_code}
             onChange={onItem_codeChanged}
           />
-          <label className="form__label" htmlFor="itemCost">
-            cost: <span className="nowrap">[3-20 letters]</span>
+          <label className="form-label" htmlFor="itemCost">
+            Cost:
           </label>
           <input
-            className={`form__input `}
+            className="form-control py border-success"
             id="itemCost"
             name="itemCost"
             type="text"
@@ -129,11 +126,11 @@ const EditItemForm = ({ item }) => {
             value={cost}
             onChange={onCostChanged}
           />
-          <label className="form__label" htmlFor="price">
-            price: <span className="nowrap">[3-20 letters]</span>
+          <label className="form-label" htmlFor="price">
+            Price:
           </label>
           <input
-            className={`form__input `}
+            className="form-control py border-success"
             id="price"
             name="price"
             type="text"
@@ -141,12 +138,12 @@ const EditItemForm = ({ item }) => {
             value={price}
             onChange={onPriceChanged}
           />
-          <label className="form__label" htmlFor="store_id">
-            store_id: <span className="nowrap">[3-20 letters]</span>
+          <label className="form-label" htmlFor="store_id">
+            Store ID:
           </label>
           <input
             disabled
-            className={`form__input `}
+            className="form-control py border-success"
             id="store_id"
             name="store_id"
             type="text"
@@ -154,24 +151,11 @@ const EditItemForm = ({ item }) => {
             value={store_id}
             onChange={onStore_idChanged}
           />
-          <label className="form__label" htmlFor="user_id">
-            user_id: <span className="nowrap">[3-20 letters]</span>
+          <label className="form-label" htmlFor="item_description">
+            Item Description:
           </label>
           <input
-            disabled
-            className={`form__input `}
-            id="user_id"
-            name="user_id"
-            type="text"
-            autoComplete="off"
-            value={user_id}
-            onChange={onUser_idChanged}
-          />
-          <label className="form__label" htmlFor="item_description">
-            item_description: <span className="nowrap">[3-20 letters]</span>
-          </label>
-          <input
-            className={`form__input `}
+            className="form-control py border-success"
             id="item_description"
             name="item_description"
             type="text"

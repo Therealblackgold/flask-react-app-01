@@ -2,6 +2,7 @@ import React from "react";
 import Widget from "../../components/Widget";
 import useAuth from "../../hooks/useAuth";
 import ItemsList from "../items/ItemsList";
+import StoresList from "../stores/StoresList";
 
 const Welcome = () => {
   const { username, isManager, isAdmin } = useAuth();
@@ -32,7 +33,7 @@ const Welcome = () => {
         </div>
       </div>
       <div className="listContainer">
-        <ItemsList />
+        <StoresList />
       </div>
     </>
   );

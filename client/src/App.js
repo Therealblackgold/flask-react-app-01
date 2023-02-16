@@ -19,6 +19,7 @@ import EditItem from "./features/items/EditItem";
 import NewItemForm from "./features/items/NewItemForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditStoreForm from "./features/stores/EditStoreForm";
 
 function App() {
   return (
@@ -48,13 +49,14 @@ function App() {
                   {/* <Route path=":id" element={<EditStore />} /> */}
                   <Route path="new" element={<NewStore />} />
                   <Route path="add" element={<NewStoreForm />} />
+                  <Route path="update/:id" element={<EditStore />} />
                   <Route path="view/:id" element={<ViewStore />} />
 
                   {/* complex routes shops/id */}
                   <Route path=":id">
                     <Route index element={<EditStore />} />
                     <Route path="add/item" element={<NewItemForm />} />
-                    <Route path="update/item" element={<EditItem />} />
+                    <Route path="update/:id" element={<EditItem />} />
                   </Route>
 
                   {/* end of protected notes route = /dash/shops */}

@@ -86,9 +86,9 @@ const EditStoreForm = ({ store, users }) => {
       setCity("");
       setUserId("");
       // redirecting to stores
-      navigate("/dash/shops");
+      navigate(`/dash/shops/view/${store.id}`);
     }
-  }, [isSuccess, isDelSuccess, navigate]);
+  }, [isSuccess, isDelSuccess, navigate, store.id]);
 
   // onClick handler to delete store by id
   const onDeleteStoreClicked = async () => {
@@ -134,7 +134,7 @@ const EditStoreForm = ({ store, users }) => {
               ID:
             </label>
             <input
-              className={`form-control py-3 border-success`}
+              className="form-control py-3 border-success"
               id="address"
               name="address"
               type="text"
@@ -149,7 +149,7 @@ const EditStoreForm = ({ store, users }) => {
               Address:
             </label>
             <input
-              className={`form-control py-3 border-success`}
+              className="form-control py-3 border-success"
               id="address"
               name="address"
               type="text"
@@ -203,7 +203,7 @@ const EditStoreForm = ({ store, users }) => {
           <div className="mb-3">
             <label className="form-label">Description:</label>
             <input
-              className={`form-control py-3 border-success`}
+              className="form-control py-3 border-success"
               id="description"
               name="description"
               type="text"
@@ -215,7 +215,7 @@ const EditStoreForm = ({ store, users }) => {
           <div className="mb-3">
             <label className="form-label">Email:</label>
             <input
-              className={`form-control py-3 border-success`}
+              className="form-control py-3 border-success"
               id="email"
               name="email"
               type="text"
@@ -229,7 +229,7 @@ const EditStoreForm = ({ store, users }) => {
               Contact_person :contact Person:
             </label>
             <input
-              className={`form-control py-3 border-success`}
+              className="form-control py-3 border-success"
               id="person"
               name="person"
               type="text"
@@ -243,7 +243,7 @@ const EditStoreForm = ({ store, users }) => {
               Contact Number:
             </label>
             <input
-              className={`form-control py-3 border-success`}
+              className="form-control py-3 border-success"
               id="contact"
               name="contact"
               type="text"
